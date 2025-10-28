@@ -1,98 +1,79 @@
-        #include <stdio.h>
-        int main(){
+#include <stdio.h>
 
-            int i, j;
+// === TORRE (recursividade simples) ===
+void mover_torre(int casas) {
+    if (casas > 0) {
+        printf("Direita\n");
+        mover_torre(casas - 1);
+    }
+}
 
-            //Movimento da Torre (5 casas para a direita) - WHILE
-            printf("Movimentando a Torre:\n");
-
-            i = 1;
-
-            while (i<= 5)
-            {
-                printf("Direita\n");
-                i++;
+// === BISPO (recursividade + loops aninhados) ===
+void mover_bispo(int casas) {
+    while (casas > 0) {
+        printf("Cima\n");
+        for (int i = 0; casas > 0; casas--) {
+            printf("Direita\n");
+            mover_bispo(casas - 1);
+            casas = 0;
             }
-
-            printf("\n");
-
-            //Movimento do Bispo (5 casas na diagonal: Cima, Direita) - FOR
-            printf("Movimentando o Bispo:\n");
-
-            for ( i = 1; i <= 5; i++)
-            {
-                printf("Cima, Direita\n");
-            }
-
-            printf("\n");
-
-            //Movimento da Rainha (8 casas para a Esquerda) - DO-WHILE
-            printf("Movimentando a Rainha:\n");
-
-            i = 1;
-
-            do
-            {
-                printf("Esquerda\n");
-                i++;
-
-            } while (i <= 8);
-
-            printf("\n");
-
-            printf("Movimentando o Cavalo:\n");
-
-            int opcao;
-
-            //Menu para escolher a opção
-            printf("\nEscolha o movimento do cavalo que deseja:\n");
-            printf("1. Para Baixo e para à Esquerda\n");
-            printf("2. Para Cima e para à Direita\n");
-            printf("\n");
-            printf("Digite o número de sua opção: ");
-            scanf("%d", &opcao);
-
-            
-            switch (opcao) {
-                case 1:
-                    // Movimento do Cavalo (2 casas para Baixo)
-                    for (i = 1; i <= 2; i++) 
-                    {
-                        printf("Baixo,");
-                    }
-
-                    //Movimento do Cavalo (1 casa para à Esquerda)
-                    j = 1;
-
-                    while (j <= 1)
-                    {
-                        printf("Esquerda\n");
-                        j++;
-                    }
-                    break;
-
-                case 2:
-                    // Movimento do Cavalo (2 casas para Cima)
-                    for (i = 1; i <= 2; i++)
-                    {
-                        printf("Cima,");
-                    }
-
-                    //Movimento do Cavalo (1 casa para à Direita)
-                    j = 1;
-
-                    while (j <= 1) 
-                    {
-                        printf("Direita\n");
-                        j++;
-                    }
-                    break;
-
-                default:
-                    printf("Opção inválida!\n");
-            }
-
-        
-            return 0;
-
         }
+    }
+
+
+// === RAINHA (recursividade simples) ===
+void mover_rainha(int casas) {
+    if (casas > 0) {
+        printf("Esquerda\n");
+        mover_rainha(casas - 1);
+    }
+}
+
+// === CAVALO (loops + condicional) ===
+void mover_cavalo() {
+    int opcao;
+    int i, j;
+
+    printf("Escolha o movimento do cavalo que deseja:\n");
+    printf("1. Para Baixo e para à Esquerda\n");
+    printf("2. Para Cima e para à Direita\n");
+    printf("Digite o número de sua opção: ");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+        case 1:
+            for (i = 1; i <= 2; i++)
+                printf("Baixo, ");
+            for (j = 1; j <= 1; j++)
+                printf("Esquerda\n");
+            break;
+
+        case 2:
+            for (i = 1; i <= 2; i++)
+                printf("Cima, ");
+            for (j = 1; j <= 1; j++)
+                printf("Direita\n");
+            break;
+
+        default:
+            printf("Opção inválida!\n");
+    }
+}
+
+// === MAIN ===
+int main() {
+
+    printf("=== Movimentando a Torre ===\n");
+    mover_torre(5);
+
+    printf("\n=== Movimentando o Bispo ===\n");
+    mover_bispo(5);
+
+    printf("\n=== Movimentando a Rainha ===\n");
+    mover_rainha(8);
+
+    printf("\n=== Movimentando o Cavalo ===\n");
+    mover_cavalo();
+
+    return 0;
+}
